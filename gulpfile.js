@@ -143,7 +143,7 @@ gulp.task('release-umd', function () {
     .pipe(babel({
       comments: false,
       compact: false,
-      externalHelpers: true,
+      externalHelpers: false,
       modules: 'umd',
       moduleId: 'DataTable'
     }))
@@ -160,7 +160,7 @@ gulp.task('release-common', function () {
     .pipe(babel({
       comments: false,
       compact: false,
-      externalHelpers: true,
+      externalHelpers: false,
       modules: 'common',
       moduleId: 'DataTable'
     }))
