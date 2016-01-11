@@ -18,6 +18,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 (function () {
   function polyfill(fnName) {
     if (!Array.prototype[fnName]) {
@@ -61,7 +67,7 @@ var PagerController = (function () {
   function PagerController($scope) {
     var _this = this;
 
-    babelHelpers.classCallCheck(this, PagerController);
+    _classCallCheck(this, PagerController);
 
     $scope.$watch('pager.count', function (newVal) {
       _this.calcTotalPages(_this.size, _this.count);
@@ -77,7 +83,7 @@ var PagerController = (function () {
     this.getPages(this.page || 1);
   }
 
-  babelHelpers.createClass(PagerController, [{
+  _createClass(PagerController, [{
     key: "calcTotalPages",
     value: function calcTotalPages(size, count) {
       var count = size < 1 ? 1 : Math.ceil(count / size);
@@ -96,7 +102,9 @@ var PagerController = (function () {
   }, {
     key: "prevPage",
     value: function prevPage() {
-      this.selectPage(--this.page);
+      if (this.page > 1) {
+        this.selectPage(--this.page);
+      }
     }
   }, {
     key: "nextPage",
@@ -106,7 +114,7 @@ var PagerController = (function () {
   }, {
     key: "canPrevious",
     value: function canPrevious() {
-      return this.page !== 1;
+      return this.page > 1;
     }
   }, {
     key: "canNext",
@@ -138,6 +146,7 @@ var PagerController = (function () {
       this.pages = pages;
     }
   }]);
+
   return PagerController;
 })();
 
@@ -163,7 +172,7 @@ var FooterController = (function () {
   function FooterController($scope) {
     var _this2 = this;
 
-    babelHelpers.classCallCheck(this, FooterController);
+    _classCallCheck(this, FooterController);
 
     this.page = this.paging.offset + 1;
     $scope.$watch('footer.paging.offset', function (newVal) {
@@ -171,7 +180,7 @@ var FooterController = (function () {
     });
   }
 
-  babelHelpers.createClass(FooterController, [{
+  _createClass(FooterController, [{
     key: "offsetChanged",
     value: function offsetChanged(newVal) {
       this.page = newVal + 1;
@@ -186,6 +195,7 @@ var FooterController = (function () {
       });
     }
   }]);
+
   return FooterController;
 })();
 
@@ -206,10 +216,10 @@ function FooterDirective() {
 
 var CellController = (function () {
   function CellController() {
-    babelHelpers.classCallCheck(this, CellController);
+    _classCallCheck(this, CellController);
   }
 
-  babelHelpers.createClass(CellController, [{
+  _createClass(CellController, [{
     key: "styles",
     value: function styles() {
       return {
@@ -266,6 +276,7 @@ var CellController = (function () {
       return val;
     }
   }]);
+
   return CellController;
 })();
 
@@ -388,10 +399,10 @@ function TranslateXY(styles, x, y) {
 
 var GroupRowController = (function () {
   function GroupRowController() {
-    babelHelpers.classCallCheck(this, GroupRowController);
+    _classCallCheck(this, GroupRowController);
   }
 
-  babelHelpers.createClass(GroupRowController, [{
+  _createClass(GroupRowController, [{
     key: "onGroupToggled",
     value: function onGroupToggled(evt) {
       evt.stopPropagation();
@@ -409,6 +420,7 @@ var GroupRowController = (function () {
       };
     }
   }]);
+
   return GroupRowController;
 })();
 
@@ -451,10 +463,10 @@ function DeepValueGetter(obj, path) {
 
 var RowController = (function () {
   function RowController() {
-    babelHelpers.classCallCheck(this, RowController);
+    _classCallCheck(this, RowController);
   }
 
-  babelHelpers.createClass(RowController, [{
+  _createClass(RowController, [{
     key: "getValue",
     value: function getValue(col) {
       if (!col.prop) return '';
@@ -493,6 +505,7 @@ var RowController = (function () {
       });
     }
   }]);
+
   return RowController;
 })();
 
@@ -553,14 +566,14 @@ var KEYS = {
 var SelectionController = (function () {
   SelectionController.$inject = ["$scope"];
   function SelectionController($scope) {
-    babelHelpers.classCallCheck(this, SelectionController);
+    _classCallCheck(this, SelectionController);
 
     this.body = $scope.body;
     this.options = $scope.body.options;
     this.selected = $scope.body.selected;
   }
 
-  babelHelpers.createClass(SelectionController, [{
+  _createClass(SelectionController, [{
     key: "keyDown",
     value: function keyDown(ev, index, row) {
       if (KEYS[ev.keyCode]) {
@@ -669,6 +682,7 @@ var SelectionController = (function () {
       this.body.onSelect({ rows: selecteds });
     }
   }]);
+
   return SelectionController;
 })();
 
@@ -689,13 +703,13 @@ var requestAnimFrame = (function () {
 
 var StyleTranslator = (function () {
   function StyleTranslator(height) {
-    babelHelpers.classCallCheck(this, StyleTranslator);
+    _classCallCheck(this, StyleTranslator);
 
     this.height = height;
     this.map = new Map();
   }
 
-  babelHelpers.createClass(StyleTranslator, [{
+  _createClass(StyleTranslator, [{
     key: "update",
     value: function update(rows) {
       var n = 0;
@@ -714,6 +728,7 @@ var StyleTranslator = (function () {
       this.map.set(idx, dom);
     }
   }]);
+
   return StyleTranslator;
 })();
 
@@ -783,7 +798,7 @@ var BodyController = (function () {
   function BodyController($scope, $timeout) {
     var _this3 = this;
 
-    babelHelpers.classCallCheck(this, BodyController);
+    _classCallCheck(this, BodyController);
 
     this.$scope = $scope;
     this.tempRows = [];
@@ -823,7 +838,7 @@ var BodyController = (function () {
     }
   }
 
-  babelHelpers.createClass(BodyController, [{
+  _createClass(BodyController, [{
     key: "rowsUpdated",
     value: function rowsUpdated(newVal, oldVal) {
       if (newVal) {
@@ -862,7 +877,7 @@ var BodyController = (function () {
             var _tempRows;
 
             this.tempRows.splice(0, this.tempRows.length);
-            (_tempRows = this.tempRows).push.apply(_tempRows, babelHelpers.toConsumableArray(rows));
+            (_tempRows = this.tempRows).push.apply(_tempRows, _toConsumableArray(rows));
           }
         }
       }
@@ -968,7 +983,7 @@ var BodyController = (function () {
         });
 
         if (_this4.expanded[k]) {
-          temp.push.apply(temp, babelHelpers.toConsumableArray(v));
+          temp.push.apply(temp, _toConsumableArray(v));
         }
       });
 
@@ -1009,7 +1024,7 @@ var BodyController = (function () {
 
         if (rows && rows.length) {
           if (expanded) {
-            temp.push.apply(temp, babelHelpers.toConsumableArray(rows));
+            temp.push.apply(temp, _toConsumableArray(rows));
             count = count + rows.length;
           }
         }
@@ -1159,7 +1174,7 @@ var BodyController = (function () {
 
         var values = this.buildTree();
         this.tempRows.splice(0, this.tempRows.length);
-        (_tempRows2 = this.tempRows).push.apply(_tempRows2, babelHelpers.toConsumableArray(values));
+        (_tempRows2 = this.tempRows).push.apply(_tempRows2, _toConsumableArray(values));
       }
 
       this.onTreeToggle({
@@ -1179,10 +1194,11 @@ var BodyController = (function () {
 
         var values = this.buildGroups();
         this.tempRows.splice(0, this.tempRows.length);
-        (_tempRows3 = this.tempRows).push.apply(_tempRows3, babelHelpers.toConsumableArray(values));
+        (_tempRows3 = this.tempRows).push.apply(_tempRows3, _toConsumableArray(values));
       }
     }
   }]);
+
   return BodyController;
 })();
 
@@ -1228,10 +1244,10 @@ function NextSortDirection(sortType, currentSort) {
 
 var HeaderCellController = (function () {
   function HeaderCellController() {
-    babelHelpers.classCallCheck(this, HeaderCellController);
+    _classCallCheck(this, HeaderCellController);
   }
 
-  babelHelpers.createClass(HeaderCellController, [{
+  _createClass(HeaderCellController, [{
     key: "styles",
     value: function styles() {
       return {
@@ -1289,6 +1305,7 @@ var HeaderCellController = (function () {
       this.onCheckboxChanged();
     }
   }]);
+
   return HeaderCellController;
 })();
 
@@ -1341,10 +1358,10 @@ function HeaderCellDirective($compile) {
 
 var HeaderController = (function () {
   function HeaderController() {
-    babelHelpers.classCallCheck(this, HeaderController);
+    _classCallCheck(this, HeaderController);
   }
 
-  babelHelpers.createClass(HeaderController, [{
+  _createClass(HeaderController, [{
     key: "styles",
     value: function styles() {
       return {
@@ -1408,6 +1425,7 @@ var HeaderController = (function () {
       });
     }
   }]);
+
   return HeaderController;
 })();
 
@@ -1968,7 +1986,7 @@ var DataTableController = (function () {
   function DataTableController($scope, $filter, $log, $transclude) {
     var _this6 = this;
 
-    babelHelpers.classCallCheck(this, DataTableController);
+    _classCallCheck(this, DataTableController);
 
     Object.assign(this, {
       $scope: $scope,
@@ -1998,7 +2016,7 @@ var DataTableController = (function () {
     });
   }
 
-  babelHelpers.createClass(DataTableController, [{
+  _createClass(DataTableController, [{
     key: "defaults",
     value: function defaults() {
       var _this7 = this;
@@ -2095,7 +2113,7 @@ var DataTableController = (function () {
 
           var sortedValues = this.$filter('orderBy')(this.rows, clientSorts);
           this.rows.splice(0, this.rows.length);
-          (_rows = this.rows).push.apply(_rows, babelHelpers.toConsumableArray(sortedValues));
+          (_rows = this.rows).push.apply(_rows, _toConsumableArray(sortedValues));
         }
       }
 
@@ -2135,7 +2153,7 @@ var DataTableController = (function () {
         if (!matches) {
           var _selected;
 
-          (_selected = this.selected).push.apply(_selected, babelHelpers.toConsumableArray(this.rows));
+          (_selected = this.selected).push.apply(_selected, _toConsumableArray(this.rows));
         }
       }
     }
@@ -2173,6 +2191,7 @@ var DataTableController = (function () {
       });
     }
   }]);
+
   return DataTableController;
 })();
 

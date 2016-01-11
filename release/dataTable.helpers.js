@@ -111,7 +111,9 @@
     }, {
       key: "prevPage",
       value: function prevPage() {
-        this.selectPage(--this.page);
+        if (this.page > 1) {
+          this.selectPage(--this.page);
+        }
       }
     }, {
       key: "nextPage",
@@ -121,7 +123,7 @@
     }, {
       key: "canPrevious",
       value: function canPrevious() {
-        return this.page !== 1;
+        return this.page > 1;
       }
     }, {
       key: "canNext",
